@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Highly Entangled Quantum Materials</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { line-height: 1.6; background: #f5f5f5; color: #333; }
+
+    html { scroll-behavior: smooth; }
+
+    /* Hero Section */
+    .workshop-hero-fixed { text-align: center; width: 100%; overflow: hidden; position: relative; padding-top: 40px; padding-bottom: 20px; }
+    .poster-wrapper { position: relative; display: inline-block; max-width: 66%; width: 100%; }
+    .poster-img { width: 100%; height: auto; display: block; }
+    .hero-overlay-fixed { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: transparent; color: white; padding: 0; text-align: center; z-index: 2; }
+    .hero-overlay-fixed h1, .hero-overlay-fixed .workshop-date { color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+    .hero-overlay-fixed h1 { font-size: 3em; margin-bottom: 10px; }
+    .hero-overlay-fixed .workshop-date { font-size: 1.6em; font-weight: bold; }
+
+    .hero-logos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 25px; margin: 20px 0; position: relative; z-index: 2; }
+    .hero-logos img { max-height: 70px; transition: transform 0.3s ease; }
+    .hero-logos img.logo-icam { max-height: 120px; } /* updated from 90px */
+    .hero-logos img:hover { transform: scale(1.1); }
+
+    .hero-links { margin: 20px 0 10px 0; text-align: center; }
+    .hero-links a { margin: 0 15px; color: #004080; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .hero-links a:hover { text-decoration: underline; }
+
+    main { padding: 40px 10%; max-width: 1200px; margin: auto; background: white; }
+    h1, h2 { color: #004080; margin-bottom: 15px; }
+    h1 { font-size: 2.4em; text-align: center; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    ul { margin-left: 20px; margin-bottom: 20px; }
+
+    .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 40px; }
+    .two-columns > div { display: flex; flex-direction: column; }
+
+    footer { background: #004080; color: white; text-align: center; padding: 20px 10%; margin-top: 40px; }
+    footer p { margin-bottom: 5px; font-size: 0.9em; }
+
+    /* Responsive */
+    @media (max-width: 1024px) { .poster-wrapper { max-width: 80%; } }
+    @media (max-width: 768px) {
+      .hero-overlay-fixed { top: 40%; }
+      .hero-overlay-fixed h1 { font-size: 2em; }
+      .hero-overlay-fixed .workshop-date { font-size: 1.4em; }
+      .hero-logos { flex-direction: column; gap: 15px; }
+      .hero-logos img { max-height: 60px; }
+      .hero-logos img.logo-icam { max-height: 90px; } /* reduced for smaller screens */
+      .hero-links a { display: block; margin: 8px 0; }
+      .two-columns { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 480px) {
+      .poster-wrapper { max-width: 90%; }
+      .hero-overlay-fixed { top: 35%; }
+      .hero-overlay-fixed h1 { font-size: 1.6em; }
+      .hero-overlay-fixed .workshop-date { font-size: 1.2em; }
+      .hero-logos img { max-height: 50px; }
+      .hero-logos img.logo-icam { max-height: 60px; }
+      .hero-links a { font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="workshop-hero-fixed">
+    <div class="poster-wrapper">
+      <img src="images/poster_2.png" alt="Quantum poster" class="poster-img">
+      <div class="hero-overlay-fixed">
+        <h1>Highly Entangled Quantum Materials</h1>
+        <p class="workshop-date">March 11–13, 2026</p>
+      </div>
+    </div>
+
+    <div class="hero-logos">
+      <a href="https://www.emory.edu" target="_blank">
+        <img src="images/emory.png" alt="Emory Logo" class="logo-large">
+      </a>
+      <a href="https://icam-i2cam.org/" target="_blank">
+        <img src="images/ICAM_logo.png" alt="ICAM Logo" class="logo-icam">
+      </a>
+      <a href="https://www.moore.org/" target="_blank">
+        <img src="images/Gordon_and_Betty_Moore_Foundation_logo.png" alt="Moore Foundation Logo" class="logo-large">
+      </a>
+    </div>
+
+    <!-- Hero Navigation Links -->
+    <div class="hero-links">
+      <a href="program.html">Program</a>
+      <a href="participants.html">Participants</a>
+      <a href="registration.html">Registration</a>
+      <a href="travel.html">Travel / Hotel</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <section class="description">
+      <p>
+        Strongly interacting quantum materials with robust non-local entanglement and emergent fractional excitations are opening new avenues for fundamental science and future quantum technologies. This workshop aims to bring together leading researchers in two-dimensional quantum materials and related strongly correlated systems to exchange ideas and advance the understanding of quantum matter and many-body entanglement. The program will include several sessions of invited talks from senior speakers, short talks from early-career speakers, a poster session, and a panel discussion.
+      </p>
+    </section>
+
+    <div class="two-columns">
+      <!-- Left column: Participants -->
+      <section id="speakers">
+        <h2>Confirmed Speakers</h2>
+        <ul>
+          <li>Claudio Chamon, Purdue University</li>
+          <li>Long Ju, MIT</li>
+          <li>JIA Li, UT Austin</li>
+          <li>Xiaodong Xu, University of Washington</li>
+        </ul>
+      </section>
+
+      <!-- Right column: Organizers + Contact -->
+      <div>
+        <section id="organizers">
+          <h2>Organizing Committee</h2>
+          <ul>
+            <li>Luiz Santos (Emory University)</li>
+            <li>Ajit Srivastava (Emory University and U. of Geneva)</li>
+            <li>Wladimir Benalcazar (Emory University)</li>
+            <li>Jiang-Xiazi Lin (Emory University)</li>
+            <li>Yao Wang (Emory University)</li>
+          </ul>
+        </section>
+
+        <section id="contact">
+          <h2>Contact</h2>
+          <p>
+            Nadya Subbotina<br>
+            Program Coordinator<br>
+            Email: <a href="mailto:nsubbot@emory.edu">nsubbot@emory.edu</a><br>
+            Phone: 404-727-8608
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Emory University. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
