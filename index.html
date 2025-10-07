@@ -21,7 +21,7 @@
 
     .hero-logos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 25px; margin: 20px 0; position: relative; z-index: 2; }
     .hero-logos img { max-height: 70px; transition: transform 0.3s ease; }
-    .hero-logos img.logo-icam { max-height: 120px; } /* updated from 90px */
+    .hero-logos img.logo-icam { max-height: 120px; }
     .hero-logos img:hover { transform: scale(1.1); }
 
     .hero-links { margin: 20px 0 10px 0; text-align: center; }
@@ -48,7 +48,7 @@
       .hero-overlay-fixed .workshop-date { font-size: 1.4em; }
       .hero-logos { flex-direction: column; gap: 15px; }
       .hero-logos img { max-height: 60px; }
-      .hero-logos img.logo-icam { max-height: 90px; } /* reduced for smaller screens */
+      .hero-logos img.logo-icam { max-height: 90px; }
       .hero-links a { display: block; margin: 8px 0; }
       .two-columns { grid-template-columns: 1fr; gap: 40px; }
     }
@@ -61,7 +61,54 @@
       .hero-logos img.logo-icam { max-height: 60px; }
       .hero-links a { font-size: 0.9em; }
     }
+  
+    /* --- Tabs styling --- */
+    .tab-link.active { text-decoration: underline; }
+    .tab-pane[hidden] { display: none; }
   </style>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-pane').forEach(s => s.hidden = true);
+      const pane = document.getElementById(id);
+      if (pane) pane.hidden = false;
+      document.querySelectorAll('.tab-link').forEach(a =>
+        a.classList.toggle('active', a.dataset.tab === id)
+      );
+    }
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.tab-link');
+      if (!link) return;
+      e.preventDefault();
+      const id = link.dataset.tab;
+      history.pushState({tab:id}, '', `#${id}`);
+      showTab(id);
+    });
+    // Handle Contact link separately - scroll to contact section on home page
+    document.addEventListener('click', (e) => {
+      const contactLink = e.target.closest('a[href="#contact"]');
+      if (!contactLink || contactLink.dataset.tab) return;
+      e.preventDefault();
+      // First, switch to home tab
+      showTab('home');
+      history.pushState({tab:'home'}, '', '#home');
+      // Then scroll to contact section
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      const initial = location.hash.replace('#','') || 'home';
+      showTab(initial);
+    });
+    window.addEventListener('popstate', (e) => {
+      const id = (e.state && e.state.tab) || location.hash.replace('#','') || 'home';
+      showTab(id);
+    });
+  </script>
 </head>
 <body>
 
@@ -89,64 +136,96 @@
 
     <!-- Hero Navigation Links -->
     <div class="hero-links">
-      <a href="program.html">Program</a>
-      <a href="participants.html">Participants</a>
-      <a href="registration.html">Registration</a>
-      <a href="travel.html">Travel / Hotel</a>
+      <a href="#home" data-tab="home" class="tab-link">Home</a>
+      <a href="#program" data-tab="program" class="tab-link">Program</a>
+      <a href="#participants" data-tab="participants" class="tab-link">Participants</a>
+      <a href="#registration" data-tab="registration" class="tab-link">Registration</a>
+      <a href="#travel" data-tab="travel" class="tab-link">Travel / Hotel</a>
       <a href="#contact">Contact</a>
     </div>
-
   </section>
 
   <!-- Main Content -->
   <main>
-    <section class="description">
-      <p>
-        Strongly interacting quantum materials with robust non-local entanglement and emergent fractional excitations are opening new avenues for fundamental science and future quantum technologies. This workshop aims to bring together leading researchers in two-dimensional quantum materials and related strongly correlated systems to exchange ideas and advance the understanding of quantum matter and many-body entanglement. The program will include several sessions of invited talks from senior speakers, short talks from early-career speakers, a poster session, and a panel discussion.
-      </p>
-    </section>
-
-    <div class="two-columns">
-      <!-- Left column: Participants -->
-      <section id="speakers">
-        <h2>Confirmed Speakers</h2>
-        <ul>
-          <li>Claudio Chamon, Purdue University</li>
-          <li>Liang Fu, MIT*</li>
-          <li>Ataç Imamoglu, ETH Zurich*</li>
-          <li>Long Ju, MIT</li>
-          <li>JIA Li, UT Austin</li>
-          <li>Xiaodong Xu, University of Washington</li>
-          <li>Ali Yazdani, Princeton </li>
-		  <li>Allan MacDonald, UT Austin </li>
-		  <li>Michael Knap, TU Munich</li>
-        </ul>
-        * Tentative
-      </section>
-
-      <!-- Right column: Organizers + Contact -->
-      <div>
-        <section id="organizers">
-          <h2>Organizing Committee</h2>
-          <ul>
-            <li>Luiz Santos (Emory University)</li>
-            <li>Ajit Srivastava (Emory University and U. of Geneva)</li>
-            <li>Wladimir Benalcazar (Emory University)</li>
-            <li>Jiang-Xiazi Lin (Emory University)</li>
-            <li>Yao Wang (Emory University)</li>
-          </ul>
-        </section>
-
-        <section id="contact">
-          <h2>Contact</h2>
+    <!-- Tabs container -->
+    <div id="tabs">
+      
+      <!-- HOME TAB -->
+      <section id="home" class="tab-pane">
+        <section class="description">
           <p>
-            Nadya Subbotina<br>
-            Program Coordinator<br>
-            Email: <a href="mailto:nsubbot@emory.edu">nsubbot@emory.edu</a><br>
-            Phone: 404-727-8608
+            Strongly interacting quantum materials with robust non-local entanglement and emergent fractional excitations are opening new avenues for fundamental science and future quantum technologies. This workshop aims to bring together leading researchers in two-dimensional quantum materials and related strongly correlated systems to exchange ideas and advance the understanding of quantum matter and many-body entanglement. The program will include several sessions of invited talks from senior speakers, short talks from early-career speakers, a poster session, and a panel discussion.
           </p>
         </section>
-      </div>
+
+        <div class="two-columns">
+          <!-- Left column: Speakers -->
+          <section id="speakers">
+            <h2>Confirmed Speakers</h2>
+            <ul>
+              <li>Claudio Chamon, Purdue University</li>
+              <li>Liang Fu, MIT*</li>
+              <li>Ataç Imamoglu, ETH Zurich*</li>
+              <li>Long Ju, MIT</li>
+              <li>JIA Li, UT Austin</li>
+              <li>Xiaodong Xu, University of Washington</li>
+              <li>Ali Yazdani, Princeton</li>
+              <li>Allan MacDonald, UT Austin</li>
+              <li>Michael Knap, TU Munich</li>
+            </ul>
+            * Tentative
+          </section>
+
+          <!-- Right column: Organizers + Contact -->
+          <div>
+            <section id="organizers">
+              <h2>Organizing Committee</h2>
+              <ul>
+                <li>Luiz Santos (Emory University)</li>
+                <li>Ajit Srivastava (Emory University and U. of Geneva)</li>
+                <li>Wladimir Benalcazar (Emory University)</li>
+                <li>Jiang-Xiazi Lin (Emory University)</li>
+                <li>Yao Wang (Emory University)</li>
+              </ul>
+            </section>
+
+            <section id="contact">
+              <h2>Contact</h2>
+              <p>
+                Nadya Subbotina<br>
+                Program Coordinator<br>
+                Email: <a href="mailto:nsubbot@emory.edu">nsubbot@emory.edu</a><br>
+                Phone: 404-727-8608
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAM TAB -->
+      <section id="program" class="tab-pane" hidden>
+        <h2>Program</h2>
+        <p>Details about the daily schedule, talks, and poster sessions will be updated here. Coming Soon!</p>
+      </section>
+
+      <!-- PARTICIPANTS TAB -->
+      <section id="participants" class="tab-pane" hidden>
+        <h2>Participants</h2>
+        <p>Details about confirmed participants will be updated here. Coming Soon!</p>
+      </section>
+
+      <!-- REGISTRATION TAB -->
+      <section id="registration" class="tab-pane" hidden>
+        <h2>Registration</h2>
+        <p>Registration details will be updated here. Coming Soon!</p>
+      </section>
+
+      <!-- TRAVEL TAB -->
+      <section id="travel" class="tab-pane" hidden>
+        <h2>Travel & Hotel</h2>
+        <p>Information on lodging, transportation, and local attractions will be updated here. Coming Soon!</p>
+      </section>
+
     </div>
   </main>
 
